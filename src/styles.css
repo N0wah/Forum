@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  background: green;
+}
+html,
+body {
+  height: 100%;
+	overflow: hidden;
+}
+#canvas3d {
+  display: block;
+}

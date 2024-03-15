@@ -1,0 +1,76 @@
+body{
+    padding: 10px 10px 10px 0px;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.container{
+    width: 40%;
+    height: 97vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+}
+
+.intro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+    
+}
+
+.intro h1 {
+    font-family: 'Mada', sans-serif;
+    font-weight: lighter;
+    font-size: 70px;
+    margin: 0;
+}
+
+.intro p {
+    margin: 0;
+    font-family: 'Mada', sans-serif;
+    font-weight: lighter;
+}                                         
+
+.email{
+    justify-self: flex-start;
+    width: 50%;
+    gap: 5px;
+}
+
+.email p{
+    font-family:"Inter", sans-serif;
+    color: #ffffff;
+}
+
+#connec{
+    width: 200px;
+    margin-bottom: 80px;
+    margin-top: 49px;
+}
+
+.nosign{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nosign p {
+    font-family: 'Mada', sans-serif;
+    font-weight:500;
+    color: #ffffff;
+}
+
+.oubli{
+    width: 310px;
+    text-align: end;
+    align-self: center; 
+}
