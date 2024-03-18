@@ -25,6 +25,7 @@ func main() {
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/signup/create", signup)
+    http.HandleFunc("/signup/sucess", signupSucess)
 	http.Handle("/src/", http.StripPrefix("/src/", http.FileServer(http.Dir("src"))))
 
 	// Serveur HTTP
@@ -60,11 +61,16 @@ func signup(w http.ResponseWriter, r *http.Request) {
 	pseudo := r.Form.Get("pseudo")
 
 	// Insertion des données dans la base de données
-	_, err = db.Exec("INSERT INTO users (nom, prenom, email, mot_de_passe, pseudo) VALUES (?, ?, ?, ?, ?)", nom, prenom, email, motDePasse, pseudo)
+	_, err = db.Exec("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, pseudo) VALUES (?, ?, ?, ?, ?)", nom, prenom, email, motDePasse, pseudo)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
 
-	fmt.Fprintf(w, "Utilisateur créé avec succès !")
+	http.Redirect(w, r, "/signup-success", http.StatusSeeOther)
+}
+
+func signupSucess(w http.ResponseWriter, r *http.Request){
+    tpl := template.Must(template.ParseFiles("pages/confirmation_register"))
+    tpl.Execute(w, nil)
 }
