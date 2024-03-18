@@ -19,31 +19,34 @@
             <h1>WELCOME</h1>
             <p>Entrez votre email et mot de passe pour créer à votre compte</p>
         </div>
-        <div class="NameName">
-            <div class="divnom">
-                <p>Nom</p>
-                <input type="email" id="Name" placeholder="Entrez votre Nom" />
+        <form action="/signup/create" method="POST">
+            <div class="NameName">
+                <div class="divnom">
+                    <p for="nom">Nom</p>
+                    <input type="text" id="Name" name="nom" placeholder="Entrez votre Nom" />
+                </div>
+                <div class="divprenom">
+                    <p for="prenom">Prénom</p>
+                    <input type="text" id="Name" name="prenom" placeholder="Entrez votre Prénom" />
+                </div>
             </div>
-            <div class="divprenom">
-                <p>Prénom</p>
-                <input type="email" id="Name" placeholder="Entrez votre Prénom" />
+            <div class="email">
+                <p for="pseudo">Pseudo</p>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" />
+                <p for="email">Email</p>
+                <input type="email" id="mail" name="email" placeholder="Entrez votre email" />
+                <p for="motdepasse">Mot de passe</p>
+                <input type="password" id="pwd" name="motdepasse" placeholder="Entrez votre mot de passe" />
+                <p>Confirmez votre mot de passe</p>
+                <input type="password" id="pwd" placeholder="Confirmez votre mot de passe" />
             </div>
-        </div>
-        <div class="email">
-            <p>Pseudo</p>
-            <input type="email" id="pseudo" placeholder="Entrez votre pseudo" />
-            <p>Email</p>
-            <input type="email" id="mail" placeholder="Entrez votre email" />
-            <p>Mot de passe</p>
-            <input type="password" id="pwd" placeholder="Entrez votre mot de passe" />
-            <p>Confirmez votre mot de passe</p>
-            <input type="password" id="pwd" placeholder="Confirmez votre mot de passe" />
-        </div>
-        <button id="connec">S'inscrire</button>
+            <input type="submit" id="connec" value="S'inscrire"></input>
+        </form>
+        
         <div class="nosign">
             <p>Inscrit ?</p>
             <div id="goregister">
-                <a href="login.html">  Clique ici</a>
+                <a href="/login">  Clique ici</a>
             </div>
         </div>
     </div>
