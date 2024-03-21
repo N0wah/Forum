@@ -1,17 +1,47 @@
-body{
+*{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    padding: 1em;
+
 }
 
-header{
-    align-self: center;
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 120px;
-    background: grey;
-    border-radius: 10px;
-    border: 1px solid black;
+    padding: 20px 100px;
+    background: plum;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+
+.navbar a{
+    position: relative;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+.navbar a::before{
+    content:'';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: .3s;
+}
+
+.navbar a:hover::before{
+    width: 100%;
+
 }
 
 .menu{
@@ -19,5 +49,5 @@ header{
 }
 
 .logo{
-    height: 100px;
+    height: 50px;
 }
