@@ -25,7 +25,7 @@ func main() {
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/signup/create", signup)
-    http.HandleFunc("/signup/sucess", signupSucess)
+    http.HandleFunc("/signup/success", signupSuccess)
 	http.Handle("/src/", http.StripPrefix("/src/", http.FileServer(http.Dir("src"))))
 
 	// Serveur HTTP
@@ -67,10 +67,10 @@ func signup(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-	http.Redirect(w, r, "/signup-success", http.StatusSeeOther)
+	http.Redirect(w, r, "/signup/success", http.StatusSeeOther)
 }
 
-func signupSucess(w http.ResponseWriter, r *http.Request){
-    tpl := template.Must(template.ParseFiles("pages/confirmation_register"))
+func signupSuccess(w http.ResponseWriter, r *http.Request){
+    tpl := template.Must(template.ParseFiles("pages/confirmation_register.html"))
     tpl.Execute(w, nil)
 }
