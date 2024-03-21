@@ -25,18 +25,102 @@ func main() {
 
 	// Routes
 	http.HandleFunc("/", isAuthenticated(homePage))
+	http.HandleFunc("/profil", profilPage)
 	http.HandleFunc("/login", loginPage)
 	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/authenticate", authenticate)
 	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/signup/create", signup)
 	http.HandleFunc("/signup/success", signupSuccess)
+	http.HandleFunc("/update-profile", updateProfile)
 	http.Handle("/src/", http.StripPrefix("/src/", http.FileServer(http.Dir("src"))))
+	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 
 	// Serveur HTTP
 	fmt.Println("Serveur démarré sur le port :8080")
 	http.ListenAndServe(":8080", nil)
 }
+
+type User struct {
+	Pseudo   string
+	Nom      string
+	Prenom   string
+	Email    string
+	Password string
+}
+
+func profilPage(w http.ResponseWriter, r *http.Request) {
+	// Récupération du pseudo de l'utilisateur depuis la session
+	session, err := store.Get(r, "session")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Vérification de la session et récupération du pseudo
+	pseudo, ok := session.Values["pseudo"].(string)
+	if !ok {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	// Récupération des données de l'utilisateur à partir de la base de données
+	user := getUserData(pseudo)
+
+	// Affichage des données sur la page profil
+	tpl := template.Must(template.ParseFiles("pages/profil.html"))
+	tpl.Execute(w, user)
+}
+
+func getUserData(pseudo string) User {
+	var user User
+	err := db.QueryRow("SELECT pseudo, nom, prenom, email, mot_de_passe FROM utilisateurs WHERE pseudo = ?", pseudo).Scan(&user.Pseudo, &user.Nom, &user.Prenom, &user.Email, &user.Password)
+	if err != nil {
+		fmt.Println("Erreur lors de la récupération des données de l'utilisateur:", err)
+	}
+	return user
+}
+
+func updateProfile(w http.ResponseWriter, r *http.Request) {
+    // Récupération du pseudo de l'utilisateur depuis la session
+    session, err := store.Get(r, "session")
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    // Vérification de la session et récupération du pseudo
+    pseudo, ok := session.Values["pseudo"].(string)
+    if !ok {
+        http.Redirect(w, r, "/login", http.StatusSeeOther)
+        return
+    }
+
+    // Récupération des nouvelles informations du formulaire
+    err = r.ParseForm()
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    newPseudo := r.Form.Get("pseudo")
+    newNom := r.Form.Get("nom")
+    newPrenom := r.Form.Get("prenom")
+    newEmail := r.Form.Get("email")
+    newPassword := r.Form.Get("password")
+
+    // Validation des données (vous pouvez ajouter des vérifications supplémentaires ici)
+
+    // Mise à jour des informations de l'utilisateur dans la base de données
+    _, err = db.Exec("UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, mot_de_passe=? WHERE pseudo=?", newPseudo, newNom, newPrenom, newEmail, newPassword, pseudo)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    // Redirection vers la page de profil après la mise à jour
+    http.Redirect(w, r, "/logout", http.StatusSeeOther)
+}
+
 
 func isAuthenticated(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -68,7 +152,6 @@ func logout(w http.ResponseWriter, r *http.Request) {
 	// Redirection vers la page de connexion
 	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
-
 
 func homePage(w http.ResponseWriter, r *http.Request) {
 	tpl := template.Must(template.ParseFiles("pages/index.html"))
