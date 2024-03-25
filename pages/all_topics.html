@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - Liste des sujets</title>
+</head>
+<body>
+    <h1>Liste des sujets</h1>
+    <ul>
+        {{ range . }}
+            <li><a href="/topic/details?id={{.ID}}">{{.Titre}}</a> (Créé par: {{ .Utilisateur }})</li>
+        {{ end }}
+    </ul>
+    <h2>Créer un nouveau sujet</h2>
+    <form action="/topic/create" method="post">
+        <label for="titre">Titre :</label><br>
+        <input type="text" id="titre" name="titre"><br>
+        <label for="contenu">Contenu :</label><br>
+        <textarea id="contenu" name="contenu"></textarea><br>
+        <input type="submit" value="Créer">
+    </form>
+</body>
+</html>

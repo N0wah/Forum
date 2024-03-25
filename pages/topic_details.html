@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - Commentaires du sujet</title>
+</head>
+<body>
+    <h1>Commentaires du sujet "{{ .Topic.Titre }}"</h1>
+    <p>Créé par : {{ .Topic.Utilisateur }}</p>
+    <p>Contenu : {{ .Topic.Contenu }}</p>
+    <h2>Ajouter un commentaire</h2>
+    <form action="/add-comment/{{ .Topic.ID }}" method="post">
+        <label for="contenu">Contenu :</label><br>
+        <textarea id="contenu" name="contenu"></textarea><br>
+        <input type="submit" value="Ajouter">
+    </form>
+    <h2>Commentaires existants</h2>
+    <ul>
+        {{ range .Comments }}
+            <li>{{ .Utilisateur }} : {{ .Contenu }}</li>
+        {{ end }}
+    </ul>
+</body>
+</html>
