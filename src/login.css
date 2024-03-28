@@ -1,5 +1,5 @@
 body{
-    padding: 10px 10px 10px 0px;
+    padding: 10px 10px 10px 10px;
     margin: 0;
     box-sizing: border-box;
     display: flex;
@@ -73,4 +73,14 @@ body{
     width: 310px;
     text-align: end;
     align-self: center; 
+}
+
+#fondblanc{
+    background: white;
+    position: absolute;
+    width: 20%;
+    height: 30%;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1000000000;
 }
