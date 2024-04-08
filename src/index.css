@@ -8,60 +8,12 @@ body{
     padding: 1em;
     gap: 1em;
 }
-
-.header{
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 100px;
-    background: plum;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    border-radius: 10px;
-}
-
-
-.navbar a{
-    position: relative;
-    font-size: 18px;
-    color: white;
-    font-weight: 500;
-    text-decoration: none;
-    margin-left: 40px;
-}
-
-.navbar a::before{
-    content:'';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: .3s;
-}
-
-.navbar a:hover::before{
-    width: 100%;
-
-}
-
-.menu{
-    display: flex;
-}
-
-.logo{
-    height: 50px;
-}
-
 .container{
     position: relative;
     width: 100%;
     height: 50vh;
     margin-top: 1em;
-    background: grey;
+    background: #274873;
     border-radius: 10px;
     display: flex;
     overflow: visible;
@@ -85,6 +37,7 @@ font-size: larger;
     width: 100%;
     align-self: center;
     text-align: end;
+    color: #F2E2CE;
 }
 
 .suggItems{
@@ -101,7 +54,7 @@ font-size: larger;
 .SuggestionForum{
     width: 40%;
     height: 100%;
-    background:red;
+    background:#274873;
     border-radius: 10px;
     padding: 1em;
     gap:1em;
@@ -136,10 +89,11 @@ font-size: larger;
 .pro p {
     font-family: 'Mada', sans-serif;
     font-weight:500;
+    color: #F2E2CE;
 }
 
 .pro .forum{
-    background: grey;
+    background: #274873;
     margin: 5px;
     border-radius: 10px;
     height: 50px;
@@ -152,27 +106,34 @@ font-size: larger;
 .suggAbonnement{
     width: 40%;
     height: 100%;
-    background:red;
+    background:#274873;
     border-radius: 10px;
 }
 
 .creatTopic{
     width: 20%;
     height: 100%;
-    background:red;
+    background:#274873;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 3em;
 }
 
 .creatTopic h1{
     font-family: 'Mada', sans-serif;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 30px;
     text-align: center;
+    color: #F2E2CE;
+}
+
+.contenu{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 .creatTopic:hover{

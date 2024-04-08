@@ -5,6 +5,7 @@ body{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    background-color: #010E26;
 }
 .container{
     width: 40%;
@@ -13,7 +14,21 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #D9D9D9;
+    background-image: linear-gradient(
+  115deg,
+  hsl(219deg 95% 8%) 0%,
+  hsl(216deg 82% 10%) 0%,
+  hsl(215deg 77% 11%) 0%,
+  hsl(215deg 70% 13%) 1%,
+  hsl(215deg 65% 15%) 4%,
+  hsl(215deg 61% 17%) 10%,
+  hsl(215deg 58% 19%) 24%,
+  hsl(215deg 55% 22%) 65%,
+  hsl(215deg 53% 24%) 82%,
+  hsl(214deg 52% 26%) 90%,
+  hsl(214deg 50% 28%) 96%,
+  hsl(214deg 49% 30%) 100%
+);
     border-radius: 10px;
 }
 
@@ -31,12 +46,14 @@ body{
     font-weight: lighter;
     font-size: 70px;
     margin: 0;
+    color: #F2E2CE;
 }
 
 .intro p {
     margin: 0;
     font-family: 'Mada', sans-serif;
     font-weight: lighter;
+    color: #F2E2CE;
 }                                         
 
 .email{
@@ -47,7 +64,7 @@ body{
 
 .email p{
     font-family:"Inter", sans-serif;
-    color: #ffffff;
+    color: #F2E2CE
 }
 
 #connec{
@@ -66,7 +83,7 @@ body{
 .nosign p {
     font-family: 'Mada', sans-serif;
     font-weight:500;
-    color: #ffffff;
+    color:#F2E2CE;
 }
 
 .oubli{
@@ -76,7 +93,7 @@ body{
 }
 
 #fondblanc{
-    background: white;
+    background: #010E26;
     position: absolute;
     width: 20%;
     height: 30%;
