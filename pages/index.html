@@ -18,10 +18,10 @@
     <header class="header">
       <a href="/" ><img class="logo" src="../img/Logo.png"></a>
       <nav class="navbar">
-          <a href="#Exploration">Exploration</a>
-          <a href="#Profile">Profile</a>
+          <a href="/topics">Exploration</a>
+          <a href="/profil">Profile</a>
           <a href="#Contact">Contact</a>
-          <a href="login.html"><span class="material-symbols-outlined">
+          <a href="/login"><span class="material-symbols-outlined">
             account_circle
             </span></a>
       </nav>
@@ -35,59 +35,28 @@
       </div>
     </div>
     <div class="suggItems">
+      
       <div class="SuggestionForum">
+        {{ range .Topics }}
         <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+          <div class="pp"><img src="../img/luffy.png" alt=""></div>
+          <div class="nam"><p>{{ .Utilisateur }}</p></div>
+          <div class="forum"><strong><p>{{ .Titre }}</p></strong></div>
         </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
-        <div class="pro">
-          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
-            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
-        </div>
+        {{ end }}
       </div>
       <div class="suggAbonnement">
 
       </div>
       
-      <div class="creatTopic" id="creatTopic" ><a href="../pages/creaTopic.html"></a>
+      <div class="creatTopic" id="creatTopic" ><a href="/topic/create">
         <div class="contenu">
         <h1>Creer ton topic</h1>
         <span style="color: #F2E2CE;" class="material-symbols-outlined">
           control_point_duplicate
           </span>
         </div>
+      </a>
       </div>
     </div>
     

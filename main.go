@@ -93,8 +93,20 @@ func logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	tpl := template.Must(template.ParseFiles("pages/index.html"))
-	tpl.Execute(w, nil)
+    // Récupérer tous les sujets depuis la base de données
+    topics, err := getAllTopics()
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    // Exécuter le modèle en passant les sujets dans le contexte
+    tpl := template.Must(template.ParseFiles("pages/index.html"))
+    tpl.Execute(w, struct {
+        Topics []Topic
+    }{
+        Topics: topics,
+    })
 }
 
 func loginPage(w http.ResponseWriter, r *http.Request) {
@@ -291,7 +303,7 @@ func createTopicPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tpl := template.Must(template.ParseFiles("pages/create_topic.html"))
+	tpl := template.Must(template.ParseFiles("pages/creaTopic.html"))
 	tpl.Execute(w, nil)
 }
 
