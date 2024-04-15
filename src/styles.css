@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  width: 100%;
+  height: 100%;
   background-image: linear-gradient(
     115deg,
     hsl(219deg 95% 8%) 0%,
