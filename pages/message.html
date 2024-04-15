@@ -29,29 +29,28 @@
         <div class="contenu_user">
             <div class="info_user">
                 <div class="photo_profil" style="background: url(../img/luffy.png);background-size: cover;background-position: center;"></div>
-                <h1>Alongkorn</h1>
+                <h1>{{.Topic.Utilisateur}}</h1>
             </div>
             <div class="contenu">
-                <h1>Titre</h1>
-                <div class="texte">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta in iusto, repellendus ducimus dolor nemo voluptas labore laborum architecto delectus omnis illo nobis sint qui fugit, quae doloribus sequi unde.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta in iusto, repellendus ducimus dolor nemo voluptas labore laborum architecto delectus omnis illo nobis sint qui fugit, quae doloribus sequi undeLorem ipsum dolor sit amet consectetur adipisicing elit. Soluta in iusto, repellendus ducimus dolor nemo voluptas labore laborum architecto delectus omnis illo nobis sint qui fugit, quae doloribus sequi unde
-                </div>              
+                <h2>{{ .Topic.Titre }}</h1>
+                <div class="texte">{{ .Topic.Contenu }}</div>              
             </div>
         </div>
         <div class="message">
+            {{range .Commentaires}}
             <div class="container_message_user">
                     <div class="info_user_message">
                         <div class="pp" style="background:url(../img/luffy.png);background-size: cover;background-position: center;"></div>
-                        Luffy
+                        <div class="pseudo">{{.Pseudo}}</div>
                     </div>
                     
                     <div class="comment">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ex quae dolore aperiam vero earum quis recusandae praesentium, nam repellendus assumenda ipsa repudiandae repellat quam commodi non, culpa sit beatae!
-                                           
+                        {{.Contenu}}                
                     </div>
             </div>
-            
+            {{end}}
         </div>
+        
         <div class="write_message">
             <form action="/add-comment/{{ .Topic.ID }}" method="post">
                 <textarea id="contenu" name="contenu" placeholder="Votre message"></textarea><br>

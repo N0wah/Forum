@@ -382,7 +382,7 @@ func viewTopicDetailsPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Affichage des détails du sujet et des commentaires sur la page
-	tpl := template.Must(template.ParseFiles("pages/topic_details.html"))
+	tpl := template.Must(template.ParseFiles("pages/message.html"))
 	tpl.Execute(w, struct {
 		Topic        Topic
 		Commentaires []Commentaire // Utilisez Commentaires ici pour correspondre au nom dans le modèle HTML
