@@ -47,6 +47,12 @@ func main() {
 	}
 	defer db.Close()
 
+	err := updateNonHashedPasswords()
+    if err != nil {
+        fmt.Println("Erreur lors de la mise à jour des mots de passe non hachés:", err)
+        return
+    }
+
 	http.HandleFunc("/", isAuthenticated(homePage))
 	http.HandleFunc("/profil", isAuthenticated(profilPage))
 	http.HandleFunc("/login", loginPage)
@@ -68,6 +74,7 @@ func main() {
 
 	fmt.Println("Serveur démarré sur le port :8080")
 	http.ListenAndServe(":8080", nil)
+
 }
 
 func isAuthenticated(next http.HandlerFunc) http.HandlerFunc {
@@ -475,4 +482,43 @@ func addComment(w http.ResponseWriter, r *http.Request) {
 	// Redirect back to the topic details page
 	http.Redirect(w, r, "/topic/details?id="+strconv.Itoa(topicID), http.StatusSeeOther)
 
+}
+
+func updateNonHashedPasswords() error {
+    // Sélectionner tous les utilisateurs avec des mots de passe non hachés
+    rows, err := db.Query("SELECT id, mot_de_passe FROM utilisateurs WHERE mot_de_passe NOT LIKE '$2a$%'")
+    if err != nil {
+        return err
+    }
+    defer rows.Close()
+
+    // Parcourir tous les utilisateurs
+    for rows.Next() {
+        var userID int
+        var password string
+
+        // Lire les données de l'utilisateur
+        err := rows.Scan(&userID, &password)
+        if err != nil {
+            return err
+        }
+
+        // Hacher le mot de passe non haché
+        hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+        if err != nil {
+            return err
+        }
+
+        // Mettre à jour le mot de passe dans la base de données
+        _, err = db.Exec("UPDATE utilisateurs SET mot_de_passe = ? WHERE id = ?", hashedPassword, userID)
+        if err != nil {
+            return err
+        }
+    }
+
+    if err := rows.Err(); err != nil {
+        return err
+    }
+
+    return nil
 }
