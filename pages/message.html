@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/main.css" />
+    <link href="https://fonts.cdnfonts.com/css/mada" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@1,100&family=Madimi+One&family=Playfair+Display:ital,wght@1,800&family=Roboto:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../src/header.css">
+<link rel="stylesheet" href="../src/message.css">
+    <title>In The Topic</title>
+</head>
+<body>
+    <header class="header">
+        <a href="/" ><img class="logo" src="../img/Logo.png"></a>
+        <nav class="navbar">
+            <a href="exploration.html">Exploration</a>
+            <a href="profil.html">Profile</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html"><span class="material-symbols-outlined">
+              account_circle
+              </span></a>
+        </nav>
+      </header>
+      <div class="content">
+        <div class="contenu_user">
+            <div class="info_user">
+                <div class="photo_profil" style="background: url(../img/luffy.png);background-size: cover;background-position: center;"></div>
+                <h1>Alongkorn</h1>
+            </div>
+            <div class="contenu">
+                <h1>Titre</h1>
+                <div class="texte">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta in iusto, repellendus ducimus dolor nemo voluptas labore laborum architecto delectus omnis illo nobis sint qui fugit, quae doloribus sequi unde.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta in iusto, repellendus ducimus dolor nemo voluptas labore laborum architecto delectus omnis illo nobis sint qui fugit, quae doloribus sequi undeLorem ipsum dolor sit amet consectetur adipisicing elit. Soluta in iusto, repellendus ducimus dolor nemo voluptas labore laborum architecto delectus omnis illo nobis sint qui fugit, quae doloribus sequi unde
+                </div>              
+            </div>
+        </div>
+        <div class="message">
+            <div class="container_message_user">
+                    <div class="info_user_message">
+                        <div class="pp" style="background:url(../img/luffy.png);background-size: cover;background-position: center;"></div>
+                        Luffy
+                    </div>
+                    
+                    <div class="comment">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ex quae dolore aperiam vero earum quis recusandae praesentium, nam repellendus assumenda ipsa repudiandae repellat quam commodi non, culpa sit beatae!
+                                           
+                    </div>
+            </div>
+            
+        </div>
+        <div class="write_message">
+            <form action="/add-comment/{{ .Topic.ID }}" method="post">
+                <textarea id="contenu" name="contenu" placeholder="Votre message"></textarea><br>
+                <input type="submit" value="Ajouter">
+            </form>
+        </div>
+      </div>
+
+</body>
+</html>

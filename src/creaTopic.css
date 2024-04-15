@@ -5,7 +5,8 @@
 }
 
 body{
-    padding: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +47,7 @@ body{
     align-items: center;
     justify-content: flex-start;
     padding: 1em;
+    gap:1em;
     border-radius: 20px;
     cursor: pointer;
 }
@@ -55,6 +57,7 @@ body{
 }
 
 .content{
+    min-width:80%;
     height: auto;
     min-height: 200px;
     max-height: 500px;
