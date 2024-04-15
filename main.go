@@ -9,6 +9,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/sessions"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var db *sql.DB
@@ -134,7 +135,14 @@ func signup(w http.ResponseWriter, r *http.Request) {
 	motDePasse := r.Form.Get("motdepasse")
 	pseudo := r.Form.Get("pseudo")
 
-	_, err = db.Exec("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, pseudo) VALUES (?, ?, ?, ?, ?)", nom, prenom, email, motDePasse, pseudo)
+	// Hash du mot de passe
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(motDePasse), bcrypt.DefaultCost)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	_, err = db.Exec("INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, pseudo) VALUES (?, ?, ?, ?, ?)", nom, prenom, email, hashedPassword, pseudo)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -158,8 +166,17 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 
 	var pseudo string
 	var id int
-	err = db.QueryRow("SELECT pseudo, id FROM utilisateurs WHERE email = ? AND mot_de_passe = ?", email, motDePasse).Scan(&pseudo, &id)
+	var hashedPassword string // Variable pour stocker le mot de passe haché depuis la base de données
+	err = db.QueryRow("SELECT pseudo, id, mot_de_passe FROM utilisateurs WHERE email = ?", email).Scan(&pseudo, &id, &hashedPassword)
 	if err != nil {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	// Comparer le mot de passe haché stocké avec le mot de passe fourni par l'utilisateur
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(motDePasse))
+	if err != nil {
+		// Les mots de passe ne correspondent pas
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
 		return
 	}

@@ -38,11 +38,11 @@
       
       <div class="SuggestionForum">
         {{ range .Topics }}
-        <div class="pro">
+        <a href="/topic/details?id={{.ID}}"><div class="pro">
           <div class="pp"><img src="../img/luffy.png" alt=""></div>
           <div class="nam"><p>{{ .Utilisateur }}</p></div>
           <div class="forum"><strong><p>{{ .Titre }}</p></strong></div>
-        </div>
+        </div></a>
         {{ end }}
       </div>
       <div class="suggAbonnement">
