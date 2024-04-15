@@ -34,6 +34,7 @@ type Topic struct {
 type Commentaire struct {
 	ID            int
 	UtilisateurID int
+	Pseudo        string
 	TopicID       int
 	Contenu       string
 }
@@ -57,6 +58,7 @@ func main() {
 	http.HandleFunc("/topics", viewAllTopicsPage)
 	http.HandleFunc("/topic/create", createTopicPage)
 	http.HandleFunc("/topic/details", viewTopicDetailsPage)
+	http.HandleFunc("/add-comment/", addComment)
 
 	http.Handle("/src/", http.StripPrefix("/src/", http.FileServer(http.Dir("src"))))
 	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
@@ -83,7 +85,7 @@ func logout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session.Values["pseudo"] = nil
-	session.Options.MaxAge = -1 
+	session.Options.MaxAge = -1
 	err = session.Save(r, w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -93,20 +95,20 @@ func logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-    // Récupérer tous les sujets depuis la base de données
-    topics, err := getAllTopics()
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
+	// Récupérer tous les sujets depuis la base de données
+	topics, err := getAllTopics()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
-    // Exécuter le modèle en passant les sujets dans le contexte
-    tpl := template.Must(template.ParseFiles("pages/index.html"))
-    tpl.Execute(w, struct {
-        Topics []Topic
-    }{
-        Topics: topics,
-    })
+	// Exécuter le modèle en passant les sujets dans le contexte
+	tpl := template.Must(template.ParseFiles("pages/index.html"))
+	tpl.Execute(w, struct {
+		Topics []Topic
+	}{
+		Topics: topics,
+	})
 }
 
 func loginPage(w http.ResponseWriter, r *http.Request) {
@@ -172,7 +174,6 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
-
 
 func profilPage(w http.ResponseWriter, r *http.Request) {
 	session, err := store.Get(r, "session")
@@ -272,7 +273,7 @@ func createTopicPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Convertir l'ID de l'utilisateur en int
-	pseudo, ok := session.Values["pseudo"]
+	pseudo, ok := session.Values["pseudo"].(string)
 	id, ok2 := session.Values["id"].(int)
 	if !ok {
 		http.Error(w, "ID utilisateur invalide", http.StatusInternalServerError)
@@ -307,7 +308,6 @@ func createTopicPage(w http.ResponseWriter, r *http.Request) {
 	tpl.Execute(w, nil)
 }
 
-
 func viewAllTopicsPage(w http.ResponseWriter, r *http.Request) {
 	topics, err := getAllTopics()
 	if err != nil {
@@ -322,7 +322,7 @@ func viewAllTopicsPage(w http.ResponseWriter, r *http.Request) {
 func viewTopicDetailsPage(w http.ResponseWriter, r *http.Request) {
 	// Récupération de l'ID du sujet à partir de la requête
 	topicID := r.URL.Query().Get("id")
-	
+
 	// Conversion de topicID en entier
 	id, err := strconv.Atoi(topicID)
 	if err != nil {
@@ -347,14 +347,13 @@ func viewTopicDetailsPage(w http.ResponseWriter, r *http.Request) {
 	// Affichage des détails du sujet et des commentaires sur la page
 	tpl := template.Must(template.ParseFiles("pages/topic_details.html"))
 	tpl.Execute(w, struct {
-		Topic    Topic
-		Comments []Commentaire
+		Topic        Topic
+		Commentaires []Commentaire // Utilisez Commentaires ici pour correspondre au nom dans le modèle HTML
 	}{
-		Topic:    topic,
-		Comments: comments,
+		Topic:        topic,
+		Commentaires: comments, // Utilisez Commentaires ici pour correspondre au nom dans le modèle HTML
 	})
 }
-
 
 func getTopicDetails(topicID int) (Topic, error) {
 	var topic Topic
@@ -367,11 +366,10 @@ func getTopicDetails(topicID int) (Topic, error) {
 	return topic, nil
 }
 
-
 func getCommentsForTopic(topicID int) ([]Commentaire, error) {
 	var comments []Commentaire
 
-	rows, err := db.Query("SELECT id, utilisateur_id, topic_id, contenu FROM commentaires WHERE topic_id = ?", topicID)
+	rows, err := db.Query("SELECT id, pseudo, utilisateur_id, topic_id, contenu FROM commentaires WHERE topic_id = ?", topicID)
 	if err != nil {
 		return nil, err
 	}
@@ -379,7 +377,7 @@ func getCommentsForTopic(topicID int) ([]Commentaire, error) {
 
 	for rows.Next() {
 		var comment Commentaire
-		err := rows.Scan(&comment.ID, &comment.UtilisateurID, &comment.TopicID, &comment.Contenu)
+		err := rows.Scan(&comment.ID, &comment.Pseudo, &comment.UtilisateurID, &comment.TopicID, &comment.Contenu)
 		if err != nil {
 			return nil, err
 		}
@@ -391,4 +389,60 @@ func getCommentsForTopic(topicID int) ([]Commentaire, error) {
 	}
 
 	return comments, nil
+}
+
+func addComment(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Parse the form data
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Extract the topic ID from the URL
+	topicID, err := strconv.Atoi(r.URL.Path[len("/add-comment/"):])
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Extract comment content from the form
+	contenu := r.Form.Get("contenu")
+
+	// Get the user's pseudo from the session
+	session, err := store.Get(r, "session")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	pseudo, ok := session.Values["pseudo"].(string)
+	if !ok {
+		http.Error(w, "Utilisateur non authentifié", http.StatusUnauthorized)
+		return
+	}
+
+	// Get the user's ID from the database
+	var userID int
+	err = db.QueryRow("SELECT id FROM utilisateurs WHERE pseudo = ?", pseudo).Scan(&userID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Insert the comment into the database with the user's ID
+	_, err = db.Exec("INSERT INTO commentaires (utilisateur_id, topic_id, pseudo, contenu) VALUES (?, ?, ?, ?)", userID, topicID, pseudo, contenu)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Redirect back to the topic details page
+	http.Redirect(w, r, "/topic/details?id="+strconv.Itoa(topicID), http.StatusSeeOther)
+
 }

@@ -17,8 +17,8 @@
     </form>
     <h2>Commentaires existants</h2>
     <ul>
-        {{ range .Comments }}
-            <li>{{ .Utilisateur }} : {{ .Contenu }}</li>
+        {{ range .Commentaires }}
+            <li>{{ .Pseudo }} : {{ .Contenu }}</li>
         {{ end }}
     </ul>
 </body>
