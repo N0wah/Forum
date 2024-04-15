@@ -27,8 +27,28 @@
         </nav>
       </header>
       <div class="container">
-        <div class="listTopic"></div>
-        <div class="creation"></div>
+        <div class="listTopic">
+          <div class="content">
+            <div class="info_user">
+              <div class="image" style="background-image: url(../img/luffy.png);background-size: cover;background-position: center;"></div>
+              <h1>tontonhitler
+              </h1>
+            </div>
+            <div class="content_texte">
+              <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at neque luctus, viverra quam in, iaculis lorem. In eget ipsum nec enim faucibus scelerisque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut purus ut nulla efficitur molestie in non metus. Etiam ut nibh tempor, commodo augue ut, sodales velit. Phasellus id molestie purus. Mauris blandit odio ante, non auctor neque tempor ac. Quisque vestibulum lectus non sapien venenatis blandit. Phasellus lacinia consectetur velit nec sagittis. Curabitur fringilla turpis dui, id mollis leo bibendum consequat.</div>
+            </div>
+          </div>
+        </div>
+        <div class="creation">
+          <h2>Créer un nouveau sujet</h2>
+            <form action="/topic/create" method="post">
+              <label for="titre">Titre : </label><br>
+              <input type="text" id="titre" name="titre"><br>
+              <label for="contenu">Contenu :</label><br>
+              <textarea name="contenu" id="contenu"></textarea><br>
+              <input type="submit" value="Créer">
+            </form>
+        </div>
       </div>
 </body>
 </html>
