@@ -55,10 +55,6 @@ a{
     font-family:"Inter", sans-serif;
 }
 
-a:hover{
-    text-decoration: underline;
-}
-
 p{
   margin:0;
 }
