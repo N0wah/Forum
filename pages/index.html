@@ -8,27 +8,89 @@
     <link rel="stylesheet" href="../src/index.css"/>
     <link href="https://fonts.cdnfonts.com/css/mada" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@1,100&family=Madimi+One&family=Playfair+Display:ital,wght@1,800&family=Roboto:wght@500&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="../src/header.css">
 
   </head>
   <body>
-    <header>
+    <header class="header">
       <a href="/" ><img class="logo" src="../img/Logo.png"></a>
-      <nav class="menu">
-        <ul>
-          <li><a href="#Exploration">Exploration</a></li>
-          <li><a href="/profil">Profile</a></li>
-          <li><a href="#Contact">Contact</a></li>
-        </ul>
+      <nav class="navbar">
+          <a href="#Exploration">Exploration</a>
+          <a href="#Profile">Profile</a>
+          <a href="#Contact">Contact</a>
+          <a href="login.html"><span class="material-symbols-outlined">
+            account_circle
+            </span></a>
       </nav>
     </header>
+    <div class="container">
+      <div class="canvas3d">
+        <canvas id="canvas3d"></canvas> 
+      </div>
+      <div class="text">
+      <p>Bienvenue sur notre forum, l'endroit <br> idéal pour échanger des idées, poser<br> des questions et rencontrer des <br> personnes en partageant vos intérêts !</p>
+      </div>
+    </div>
+    <div class="suggItems">
+      <div class="SuggestionForum">
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+        <div class="pro">
+          <div class="pp"><img src="../img/luffy.png" alt=""></div><div class="nam"><p>K.ren</p></div><div class="forum"><strong> <p>Sorem ipsum dolor sit amet </strong>
+            Sorem ipsum dolor sit amet consecteturSorem ipsum dolor sit amet consecteturSorem ipsum</p></div>
+        </div>
+      </div>
+      <div class="suggAbonnement">
 
-
-
-
-    <canvas id="canvas3d"></canvas>
+      </div>
+      
+      <div class="creatTopic" id="creatTopic" ><a href="../pages/creaTopic.html"></a>
+        <div class="contenu">
+        <h1>Creer ton topic</h1>
+        <span style="color: #F2E2CE;" class="material-symbols-outlined">
+          control_point_duplicate
+          </span>
+        </div>
+      </div>
+    </div>
+    
 
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
     <script type="importmap">

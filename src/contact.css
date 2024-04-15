@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    
+body{
+    padding: 1em;
+    gap: 1em;
+}
+
+.container{
+    position: absolute;
+    width: 70%;
+    height: 60%;
+    top: 55%;
+    right: 50%;
+    display: flex;
+    transform: translate(50%,-50%);
+    border-radius: 4px;
+    border: solid white 2px;
+}
+
+.container #image{
+    width: 50%;
+}
+
+.infocontact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+.infocontact h1{
+    margin-top: -100px;
+    margin-bottom: 50px;
+    font-family: 'Mada', sans-serif;
+    font-weight:500;
+    color: #ffffff;
+}
+
+.infocontact .mail{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mail #mail{
+    margin-top: 10px;
+}

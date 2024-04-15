@@ -1,23 +1,143 @@
-body{
+*{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+}
+    
+body{
     padding: 1em;
+    gap: 1em;
 }
-
-header{
-    align-self: center;
+.container{
+    position: relative;
     width: 100%;
-    height: 120px;
-    background: grey;
+    height: 50vh;
+    margin-top: 1em;
+    background: #274873;
     border-radius: 10px;
-    border: 1px solid black;
     display: flex;
-    justify-content: space-between;
+    overflow: visible;
+    box-sizing: border-box;
+    padding: 0;
+    padding: 0px 100px;
 }
 
-.menu{
-    display: flex;
+.canvas3d{
+    width: 60%;
+    overflow: visible;
+    position: absolute;
+}
+.container p{
+font-family: 'Mada', sans-serif;
+font-weight: 500;
+font-size: larger;
 }
 
-.logo{
-    height: 100px;
+.text{
+    width: 100%;
+    align-self: center;
+    text-align: end;
+    color: #F2E2CE;
+}
+
+.suggItems{
+    width: 100%;
+    margin-top: 1em;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    height: 33vh;
+    gap: 1em;
+    
+}
+
+.SuggestionForum{
+    width: 40%;
+    height: 100%;
+    background:#274873;
+    border-radius: 10px;
+    padding: 1em;
+    gap:1em;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.SuggestionForum::-webkit-scrollbar{
+    display: none;
+}
+
+.pro{
+    display: flex;
+    background: transparent;
+    align-items: center;
+    gap:1em;
+}
+
+.pro:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    border: solid 1px black;
+    border-radius: 10px ;
+}
+
+.pro img{
+    width: 70px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+}
+
+.pro p {
+    font-family: 'Mada', sans-serif;
+    font-weight:500;
+    color: #F2E2CE;
+}
+
+.pro .forum{
+    background: #274873;
+    margin: 5px;
+    border-radius: 10px;
+    height: 50px;
+    max-height: 100px;
+    text-align: center;
+    vertical-align:middle;
+}
+
+
+.suggAbonnement{
+    width: 40%;
+    height: 100%;
+    background:#274873;
+    border-radius: 10px;
+}
+
+.creatTopic{
+    width: 20%;
+    height: 100%;
+    background:#274873;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.creatTopic h1{
+    font-family: 'Mada', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: #F2E2CE;
+}
+
+.contenu{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.creatTopic:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+
 }
