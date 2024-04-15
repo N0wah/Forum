@@ -327,14 +327,20 @@ func createTopicPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func viewAllTopicsPage(w http.ResponseWriter, r *http.Request) {
-	topics, err := getAllTopics()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+    // Récupérer tous les sujets depuis la base de données
+    topics, err := getAllTopics()
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
 
-	tpl := template.Must(template.ParseFiles("pages/all_topics.html"))
-	tpl.Execute(w, topics)
+    // Exécuter le modèle en passant les sujets dans le contexte
+    tpl := template.Must(template.ParseFiles("pages/exploration.html"))
+    tpl.Execute(w, struct {
+        Topics []Topic
+    }{
+        Topics: topics,
+    })
 }
 
 func viewTopicDetailsPage(w http.ResponseWriter, r *http.Request) {
