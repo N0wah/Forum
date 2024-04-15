@@ -55,6 +55,7 @@ func main() {
 	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/signup/create", signup)
 	http.HandleFunc("/signup/success", signupSuccess)
+	http.HandleFunc("/contact", contactPage)
 	http.HandleFunc("/update-profile", isAuthenticated(updateProfile))
 	http.HandleFunc("/topics", isAuthenticated(viewAllTopicsPage))
 	http.HandleFunc("/topic/create", isAuthenticated(createTopicPage))
@@ -120,6 +121,11 @@ func loginPage(w http.ResponseWriter, r *http.Request) {
 
 func signupPage(w http.ResponseWriter, r *http.Request) {
 	tpl := template.Must(template.ParseFiles("pages/register.html"))
+	tpl.Execute(w, nil)
+}
+
+func contactPage(w http.ResponseWriter, r *http.Request) {
+	tpl := template.Must(template.ParseFiles("pages/contact.html"))
 	tpl.Execute(w, nil)
 }
 
