@@ -33,28 +33,39 @@
       </header>
     <div class="container">
         <div class="logoprofil">
-            <img src="../img/luffy.png">
-            <h1>{{.Pseudo}}</h1>
+            <div class="logo_profil" style="background: url(../img/luffy.png);background-size: cover;background-position: center;"></div>
+            <h1>MageNoir</h1>
         </div>
         <div class="infomation">
-            <form action="/update-profile" method="post">
+            <form action="/update-profil" method="post">
+            <div class="pseudo_classe">
                 <p>Pseudo</p>
-                <input type="text" name="pseudo" value="{{.Pseudo}}">
+                <input type="text" id="pseudo" value="{{.Pseudo}}">
+            </div>
+            <div class="nameLastname">
                 <p>Nom</p>
-                <input type="text" name="nom" value="{{.Nom}}">
+                <input type="text" id="nom" value="{{.Nom}}">
                 <p>Prénom</p>
-                <input type="text" name="prenom" value="{{.Prenom}}">
+                <input type="text" id="prenom" value="{{.Prenom}}">
+            </div>
+            <div class="email">
                 <p>Email</p>
-                <input type="text" name="email" value="{{.Email}}">
+                <h1>{{.Email}}</h1>
+            </div>
+            <div class="passwordClasee">
                 <p>Mot de passe</p>
-                <input type="password" name="password" placeholder="Entrez votre nouveau mot de passe">
+                <input type="password" id="password" placeholder="motdepasse">
                 <p>Confirmer le mot de passe</p>
-                <input type="password" name="confirm_password" placeholder="Confirmez votre nouveau mot de passe">
-                <div class="but">
-                    <button type="submit">Mettre à Jour</button>
-                </div>
+                <input type="password" id="password" placeholder="Confirmer le mot de passe">
+            </div>        
+            <div class="but">
+                <button>Mettre à Jour</button>
+                <button>Annuler</button>
+                <a href="/logout"><button>Se déconnecter</button></a>
+             </div> 
             </form>
         </div>
+
     </div>
 </body>
 </html>
